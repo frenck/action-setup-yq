@@ -35,9 +35,9 @@ jobs:
 
 ## Arguments
 
-|   Input   |                             Description                              |   Usage    |
-| :-------: | :------------------------------------------------------------------: | :--------: |
-| `version` | The yq version to install. If omitted, the latest will be installed. | _Optional_ |
+|   Input   |                    Description                    |   Usage    |
+| :-------: | :-----------------------------------------------: | :--------: |
+| `version` | The yq version to install. The latest if omitted. | _Optional_ |
 
 ## Outputs
 
