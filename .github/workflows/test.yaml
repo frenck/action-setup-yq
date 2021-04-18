@@ -1,0 +1,16 @@
+---
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Test yq
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v2
+      - name: 🏗 Set up yq
+        uses: ./
+      - name: 🚀 Run yq
+        run: yq --version

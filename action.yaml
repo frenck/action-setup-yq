@@ -1,0 +1,62 @@
+---
+name: "Frenck's yq setup"
+description: 🚀 Frenck's GitHub Action for setting up yq.
+author: frenck
+
+branding:
+  color: red
+  icon: thumbs-up
+
+inputs:
+  version:
+    required: false
+    description: The version of yq to install
+    default: latest
+outputs:
+  version:
+    description: The version of yq that was installed
+    value: ${{ steps.version.outputs.version }}
+
+runs:
+  using: composite
+  steps:
+    - id: version
+      shell: bash
+      run: |
+        version="v$( echo '${{ inputs.version }}' | sed s/^v//)"
+        if [[ "${{ inputs.version }}" == "latest" ]]; then
+          version=$(curl -s https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.tag_name')
+        fi
+
+        if [[ "$version" == "null" ]]; then
+          exit 1;
+        fi
+
+        echo "::set-output name=version::${version}"
+    - shell: bash
+      run: |
+        echo "Installing yq ${{ steps.version.outputs.version }}..."
+
+        if [[ "${{ runner.os }}" == "Linux" ]]; then
+          executable="yq_linux_amd64"
+        elif [[ "${{ runner.os }}" == "Windows" ]]; then
+          executable="yq_windows_386.exe"
+        elif [[ "${{ runner.os }}" == "macOS" ]]; then
+          executable="yq_darwin_amd64"
+        fi
+
+        dest="${RUNNER_TEMP}/yq/yq"
+        if [[ "${{ runner.os }}" == "Windows" ]]; then
+          dest="${dest}.exe"
+        fi
+
+        mkdir -p "$(dirname ${dest})"
+        curl \
+          -L \
+          "https://github.com/mikefarah/yq/releases/download/${{ steps.version.outputs.version }}/${executable}" \
+          --output "$dest"
+
+        if [[ "${{ runner.os }}" != "Windows" ]]; then
+          chmod +x "${dest}"
+        fi
+        echo "$(dirname ${dest})" >> $GITHUB_PATH
