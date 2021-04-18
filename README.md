@@ -26,7 +26,7 @@ jobs:
   example:
     name: Example
     runs-on: ubuntu-latest
-    steps:      
+    steps:
       - name: 🏗 Set up yq
         uses: frenck/action-setup-yq@v1
       - name: 🚀 Use yq
@@ -35,15 +35,15 @@ jobs:
 
 ## Arguments
 
-|   Input    |                           Description                                |   Usage    |
-| :--------: | :------------------------------------------------------------------: | :--------: |
-| `version`  | The yq version to install. If omitted, the latest will be installed. | _Optional_ |
+|   Input   |                             Description                              |   Usage    |
+| :-------: | :------------------------------------------------------------------: | :--------: |
+| `version` | The yq version to install. If omitted, the latest will be installed. | _Optional_ |
 
 ## Outputs
 
-|   Output   |             Description               |   Usage    |
-| :--------: | :-----------------------------------: | :--------: |
-| `version`  | The version of yq that was installed. | _Optional_ |
+|  Output   |              Description              |   Usage    |
+| :-------: | :-----------------------------------: | :--------: |
+| `version` | The version of yq that was installed. | _Optional_ |
 
 ## Real-world examples
 
