@@ -32,7 +32,7 @@ runs:
           exit 1;
         fi
 
-        echo "::set-output name=version::${version}"
+        echo "version=${version}" >> "$GITHUB_OUTPUT"
     - shell: bash
       run: |
         echo "Installing yq ${{ steps.version.outputs.version }}..."
