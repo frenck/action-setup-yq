@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: 🏗 Set up yq
         uses: frenck/action-setup-yq@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: 🚀 Use yq
         run: yq --version
 ```
@@ -37,6 +39,7 @@ jobs:
 
 |   Input   |                    Description                    |   Usage    |
 | :-------: | :-----------------------------------------------: | :--------: |
+|  `token`  | The GitHub token to use for making API requests.  | _Required_ |
 | `version` | The yq version to install. The latest if omitted. | _Optional_ |
 
 ## Outputs

@@ -8,6 +8,9 @@ branding:
   icon: thumbs-up
 
 inputs:
+  token:
+    required: true
+    description: The GitHub token to use for making API requests
   version:
     required: false
     description: The version of yq to install
@@ -22,6 +25,8 @@ runs:
   steps:
     - id: version
       shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
       run: |
         version="v$( echo '${{ inputs.version }}' | sed s/^v//)"
         if [[ "${{ inputs.version }}" == "latest" ]]; then
